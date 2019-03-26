@@ -1,0 +1,118 @@
+{
+    "manifestVersion": 1,
+    "id": "pnp-sp-alm-devops-extension",
+    "name": "O365 And PnP Pipelines Tasks",
+    "version": "0.1.0",
+    "publisher": "SharePoint PnP",
+    "targets": [{
+        "id": "Microsoft.VisualStudio.Services"
+    }],
+    "description": "Tasks for Builds and Releases empowered by the PnP Community.",
+    "categories": [
+        "Azure Pipelines"
+    ],
+    "tags": [
+        "SharePoint", "PnP","SharePoint Online","SharePoint 2016","SharePoint 2013",
+        "xml", "deployment","O365",
+        "PowerShell","Provisioning", "Provisioning Engine"
+    ],
+    "icons": {
+        "default": "Images/Icon128.png",
+        "large": "Images/Icon512.png"
+    },
+    "content": {
+        "details": {
+            "path": "overview.md"
+        }
+    },
+    "links": {
+        "getstarted": {
+            "uri": "https://github.com/pnp/sp-alm-devops-extension"
+        },
+        "learn": {
+            "uri": "https://github.com/pnp/sp-alm-devops-extension/blob/master/README.md"
+        },
+        "issues": { 
+            "uri": "https://github.com/pnp/sp-alm-devops-extension/issues"
+        }
+    },
+    "repository": {
+        "type": "git",
+        "uri": "https://github.com/pnp/sp-alm-devops-extension.git"
+    },
+    "badges": [],
+    "screenshots": [],
+    "branding": {
+        "color": "rgb(240,240,240)",
+        "theme": "light"
+    },
+    "scopes": [
+        "vso.build_execute"
+    ],
+    "files": [    
+        {
+            "path": "PnPDeploySpArtifacts"
+        },
+        {
+            "path": "Images",
+            "addressable": true
+        }
+    ],
+    "contributions": [
+        {
+            "id": "PnP-DeploySpArtifacts",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "PnPDeploySpArtifacts"
+            }
+        },
+        {
+            "id": "sharepoint-site-service-endpoint",
+            "description": "SharePointSiteAuthenticationEndpoint",
+            "type": "ms.vss-endpoint.service-endpoint-type",
+            "targets": [
+                "ms.vss-endpoint.endpoint-types"
+            ],
+            "properties": {
+                "name": "sharepoint-site",
+                "displayName": "SharePoint Site",
+                "url": {
+                    "displayName": "SharePoint Site Url",
+                    "helpText": "Url for the SharePoint Site to connect to."
+                },
+                "authenticationSchemes": [
+                    {
+                        "type": "ms.vss-endpoint.endpoint-auth-scheme-basic",
+                        "inputDescriptors": [
+                            {
+                                "id": "username",
+                                "name": "Username",
+                                "description": "Username",
+                                "inputMode": "textbox",
+                                "isConfidential": false,
+                                "validation": {
+                                    "isRequired": true,
+                                    "dataType": "string"
+                                }
+                            },
+                            {
+                                "id": "password",
+                                "name": "Password",
+                                "description": "Password",
+                                "inputMode": "passwordbox",
+                                "isConfidential": true,
+                                "validation": {
+                                    "isRequired": true,
+                                    "dataType": "string"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    ]
+}
