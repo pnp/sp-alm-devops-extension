@@ -5,8 +5,8 @@ This extension includes a group of tasks that leverages SharePoint and O365 func
 
 ## Content:
 
-#### [Task: Deploy PnP SharePoint Artifacts](#Task-Deploy-PnP-SharePoint-Artifacts)
-#### [Task: PnP PowerShell](#Task-PnP-PowerShell)
+1. #### [Task: Deploy PnP SharePoint Artifacts](#Task-Deploy-PnP-SharePoint-Artifacts)
+2. #### [Change Log](#Change-Log)
 
 ## <a id="Task-Deploy-PnP-SharePoint-Artifacts"> </a> Task Deploy PnP SharePoint Artifacts
 
