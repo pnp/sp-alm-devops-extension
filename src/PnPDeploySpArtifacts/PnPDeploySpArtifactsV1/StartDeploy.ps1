@@ -11,7 +11,7 @@ Trace-VstsEnteringInvocation $MyInvocation
 try {
     Import-VstsLocStrings "$PSScriptRoot/task.json"
 	
-    . "$PSScriptRoot/ps_modules/CommonScripts/Utility.ps1"
+    . "$PSScriptRoot/ps_modules/Common/Utility.ps1"
     # get the tmp path of the agent
     $agentTmpPath = "$($env:AGENT_RELEASEDIRECTORY)\_temp"
     $tmpInlineXmlFileName = [System.IO.Path]::GetRandomFileName() + ".xml"
