@@ -1,7 +1,7 @@
 {
     "id": "300c87b8-2b8e-462f-a9ee-7f4ee14225bd",
-    "name": "DeployArtifactsWithPnP",
-    "friendlyName": "Deploy SharePoint Artifacts",
+    "name": "PnPDeploySpArtifacts",
+    "friendlyName": "Deploy SharePoint PnP Artifacts",
     "description": "Deploys SharePoint artifacts with the PnP provisioning engine.",
     "author": "Sebastian Schütze",
     "helpMarkDown": "It uses the Apply-PnPProvisioningTemplate command from the PnP PowerShell Module.<br/><br/>[More Information](https://docs.microsoft.com/en-us/powershell/module/sharepoint-pnp/apply-pnpprovisioningtemplate?view=sharepoint-ps)",
