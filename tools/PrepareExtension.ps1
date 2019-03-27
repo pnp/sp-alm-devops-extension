@@ -12,7 +12,7 @@ $extensionIds | ForEach-Object {
 
     $taskIdName = $_
 
-    $destinationFolder = "$currentPath\..\src\$taskIdName\$taskIdNameV1\ps_modules"
+    $destinationFolder = "$currentPath\..\src\$taskIdName\$($taskIdName)V1\ps_modules"
 
     #remove any content from those folder, as they are temporary
     Remove-Item -Path $destinationFolder -Recurse -Force -ErrorAction SilentlyContinue
