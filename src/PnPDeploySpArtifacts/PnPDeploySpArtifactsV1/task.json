@@ -1,0 +1,164 @@
+{
+    "id": "300c87b8-2b8e-462f-a9ee-7f4ee14225bd",
+    "name": "PnPDeploySpArtifacts",
+    "friendlyName": "Deploy SharePoint PnP Artifacts",
+    "description": "Deploys SharePoint artifacts with the PnP provisioning engine.",
+    "author": "Sebastian Schütze",
+    "helpMarkDown": "It uses the Apply-PnPProvisioningTemplate command from the PnP PowerShell Module.<br/><br/>[More Information](https://docs.microsoft.com/en-us/powershell/module/sharepoint-pnp/apply-pnpprovisioningtemplate?view=sharepoint-ps)",
+    "category": "Deploy",
+    "visibility": [
+        "Release"
+    ],
+    "demands": ["PowerShell","windir"],
+    "version": {
+        "Major": "0",
+        "Minor": "1",
+        "Patch": "0"
+    },
+    "preview": false,
+    "minimumAgentVersion": "2.115.0",
+    "groups": [{
+        "name": "advanced",
+        "displayName": "Advanced",
+        "isExpanded": false
+    }],
+    "instanceNameFormat": "Deploy SharePoint Artifacts for $(SharePointVersion)",
+    "inputs": [{
+            "name": "SharePointVersion",
+            "type": "radio",
+            "label": "SharePoint Version",
+            "defaultValue": "SpOnline",
+            "required": true,
+            "helpMarkDown": "SharePoint version to witch the PnP xml should be deployed to.",
+            "options": {
+                "SpOnline": "SharePoint Online",
+                "Sp2016": "SharePoint 2016",
+                "Sp2013": "SharePoint 2013"
+            }
+        },
+        {
+            "name": "ConnectedServiceName",
+            "aliases": [
+                "sharepointConntection"
+            ],
+            "type": "connectedService:sharepoint-site",
+            "label": "SharePoint Connection",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Select the SharePoint connection to SharePoint for the deployment. Create a new service connection to the SharePoint site where you want to connect to."
+        },
+        {
+            "name": "FileOrInline",
+            "type": "pickList",
+            "label": "Type",
+            "defaultValue": "File",
+            "required": true,
+            "helpMarkDown": "Type of the script: File Path or Inline Xml.",
+            "options": {
+                "File": "File Path",
+                "Inline": "Inline Xml"
+            }
+        },
+        {
+            "name": "PnPXmlInline",
+            "type": "multiLine",
+            "label": "Inline PnP Xml",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Allows you to specify xml containing the provisioning template. <br/><br/>Check the [existing schema](https://github.com/SharePoint/PnP-Provisioning-Schema) for a well formatted inline PnP xml.",
+            "visibleRule": "FileOrInline = Inline",
+            "properties": {
+                "resizable": "true",
+                "rows": "10"
+            }
+        },
+        {
+            "name": "PnPXmlFilePath",
+            "type": "filePath",
+            "label": "PnP Xml Path",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Path to the xml or pnp file containing the provisioning template. <br/><br/>Check the [existing schema](https://github.com/SharePoint/PnP-Provisioning-Schema) for a well formatted PnP xml file.",
+            "visibleRule": "FileOrInline = File"
+        },
+        {
+            "name": "Handlers",
+            "type": "string",
+            "label": "Handler To Be Used",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "Give a comma separated list of Handlers (e.g. Lists,Fields). Leave empty if all Handlers should be used.<br/> Allows you to only process a specific part of the template. Notice that this might fail, as some of the handlers require other artifacts in place if they are not part of what your applying. <br/><br/>Check for [available Handlers](https://msdn.microsoft.com/en-us/pnp_sites_core/officedevpnp.core.framework.provisioning.model.handlers)."
+        },
+        {
+            "name": "Parameters",
+            "type": "multiLine",
+            "label": "Parameters To Be Added",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "Allows you to specify parameters that can be referred to in the template by means of the {parameter:} token.<br/><br/> See examples on it works internally [how to use this parameter](https://github.com/SharePoint/PnP-PowerShell/blob/master/Documentation/ApplyPnPProvisioningTemplate.md#example-3).<br/><br/> Example:<br/><br/> <i>ListTitle=Projects<br/>parameter2=a second value</i> <br/><br/> use only one parameter-value pair per line",
+            "properties": {
+                "resizable": "true",
+                "rows": "10"
+            }
+        },        
+        {
+            "name": "RequiredVersion",
+            "type": "string",
+            "label": "Required Version",
+            "defaultValue": "latest",
+            "required": true,
+            "helpMarkDown": "Set the version that should be loaded. Use 'latest' to always load the newest version. Check github for the released versions: https://github.com/SharePoint/PnP-PowerShell/releases",
+            "groupName": "advanced"
+        },
+        {
+            "name": "ResourceFolder",
+            "type": "filePath",
+            "label": "Resource Folder",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "Root folder where resources/files that are being referenced in the template are located. If not specified the same folder as where the provisioning template is located will be used.",
+            "groupName": "advanced"
+        },
+        {
+            "name": "ClearNavigation",
+            "type": "boolean",
+            "label": "Clear Navigation",
+            "defaultValue": "false",
+            "required": false,
+            "helpMarkDown": "Override the RemoveExistingNodes attribute in the Navigation elements of the template. If you specify this value the navigation nodes will always be removed before adding the nodes in the template",
+            "groupName": "advanced"
+        },
+        {
+            "name": "IgnoreDuplicateDataRowErrors",
+            "type": "boolean",
+            "label": "Ignore Duplicate Data Row Errors",
+            "defaultValue": "false",
+            "required": false,
+            "helpMarkDown": "Ignore duplicate data row errors when the data row in the template already exists.",
+            "groupName": "advanced"
+        },
+        {
+            "name": "OverwriteSystemPropertyBagValues",
+            "type": "boolean",
+            "label": "Overwrite System Property Bag Values",
+            "defaultValue": "false",
+            "required": false,
+            "helpMarkDown": "Specify this parameter if you want to overwrite and/or create properties that are known to be system entries (starting with vti_, dlc_, etc.)",
+            "groupName": "advanced"
+        },
+        {
+            "name": "ProvisionContentTypesToSubWebs",
+            "type": "boolean",
+            "label": "Provision Content Types To Sub Webs",
+            "defaultValue": "false",
+            "required": false,
+            "helpMarkDown": "If set content types will be provisioned if the target web is a subweb.",
+            "groupName": "advanced"
+        }
+    ],
+    "execution": {
+        "PowerShell3": {
+            "target": "StartDeploy.ps1"
+        }
+    }
+}
